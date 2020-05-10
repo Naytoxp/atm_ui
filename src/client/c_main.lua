@@ -11,6 +11,29 @@ for i = 1, 7 do
     end 
 end
 
+
+local Atm = {
+    {prop = 'prop_atm_02'},
+    {prop = 'prop_atm_03'},
+    {prop = 'prop_fleeca_atm'},
+    {prop = 'prop_atm_01'}
+}
+
+function InitiateBlip()
+    for k, v in pairs(Config.ATMBlip) do
+        local blip = AddBlipForCoord(v)
+        SetBlipSprite(blip, 434)
+        SetBlipScale(blip, 0.8)
+        BeginTextCommandSetBlipName("STRING")
+        AddTextComponentString("ATM")
+        EndTextCommandSetBlipName(blip)
+        SetBlipAsShortRange(blip, true)
+        SetBlipColour(blip, 2)
+    end
+end
+
+InitiateBlip()
+
 Citizen.CreateThread(function()
     while true do
         Config.GetPlayerMoney()
@@ -71,12 +94,6 @@ end)
 
 ------------------------------------------------------------------------------------------------------
 
-local Atm = {
-    {prop = 'prop_atm_02'},
-    {prop = 'prop_atm_03'},
-    {prop = 'prop_fleeca_atm'},
-    {prop = 'prop_atm_01'}
-}
 
 function IsNearATM()
     local objects = {}
@@ -135,7 +152,7 @@ function SetDataSlot(scaleform, slotId, string, amount)
     BeginScaleformMovieMethod(scaleform, "SET_DATA_SLOT")
     ScaleformMovieMethodAddParamInt(tonumber(slotId))
     BeginTextCommandScaleformString(string)
-    AddTextComponentFormattedInteger(amount, 1)
+    AddTextComponentFormattedInteger(Amount, 1)
     EndTextCommandScaleformString()
     EndScaleformMovieMethod()
 end
