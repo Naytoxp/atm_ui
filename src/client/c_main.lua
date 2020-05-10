@@ -70,6 +70,58 @@ AddEventHandler("atm:sendMoney", function(money, cash)
 end)
 
 ------------------------------------------------------------------------------------------------------
+
+local Atm = {
+    {prop = 'prop_atm_02'},
+    {prop = 'prop_atm_03'},
+    {prop = 'prop_fleeca_atm'},
+    {prop = 'prop_atm_01'}
+}
+
+function IsNearATM()
+    local objects = {}
+    for _,v in pairs(Atm) do
+      table.insert(objects, v.prop)
+    end
+  
+    local ped = GetPlayerPed(-1)
+    local list = {}
+  
+    for _,v in pairs(objects) do
+        local obj = GetClosestObjectOfType(GetEntityCoords(ped).x, GetEntityCoords(ped).y, GetEntityCoords(ped).z, 5.0, GetHashKey(v), false, true ,true)
+        local dist = GetDistanceBetweenCoords(GetEntityCoords(ped), GetEntityCoords(obj), true)
+        table.insert(list, {object = obj, distance = dist})
+      end
+  
+      local closest = list[1]
+      for _,v in pairs(list) do
+        if v.distance < closest.distance then
+          closest = v
+        end
+      end
+  
+      local distance = closest.distance
+      local object = closest.object
+      
+
+      if distance < 1.8 then
+        return true
+      end
+end
+
+RegisterCommand("openatm", function()
+    if not IsPedInAnyVehicle(PlayerPedId(), false) then
+        if IsNearATM() and not display then
+            bankForm = AtmMainMenu("ATM")
+            curMenu = "mainMenu"
+            display = true
+        end
+    end
+end)
+
+RegisterKeyMapping("openatm", "openatm", "keyboard", "e")
+
+------------------------------------------------------------------------------------------------------
 --------------------------------- UNDER THIS, YOU SHOULD'NT EDIT -------------------------------------
 ------------------- IF YOU DO, I RESERVE THE RIGHT TO NOT PROVIDE ANY SUPPORT ------------------------
 ------------------------------------------------------------------------------------------------------
@@ -79,11 +131,11 @@ function AddString(param) -- Function name from the
 	EndTextCommandScaleformString()
 end
 
-function SetDataSlot(scaleform, slotId, String, Amount)
+function SetDataSlot(scaleform, slotId, string, amount)
     BeginScaleformMovieMethod(scaleform, "SET_DATA_SLOT")
     ScaleformMovieMethodAddParamInt(tonumber(slotId))
-    BeginTextCommandScaleformString(String)
-    AddTextComponentFormattedInteger(Amount, 1)
+    BeginTextCommandScaleformString(string)
+    AddTextComponentFormattedInteger(amount, 1)
     EndTextCommandScaleformString()
     EndScaleformMovieMethod()
 end

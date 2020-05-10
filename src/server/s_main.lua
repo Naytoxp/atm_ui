@@ -13,21 +13,25 @@ AddEventHandler("atm:handlingMoney", function(action, amount)
     local xPlayer = ESX.GetPlayerFromId(_source)
     -- DO NOT CHANGE THIS
     if action == "withdraw" then
-        -- CHANGE THIS 
-        xPlayer.addMoney(amount)
-        xPlayer.removeBank(amount)
-        TriggerClientEvent("esx:showAdvancedNotification", xPlayer.source, "Banque", "Retrait", "Vous avez retiré ~g~$"..amount, "CHAR_BANK_MAZE")
-        -- DO NOT CHANGE THIS
-        TriggerClientEvent("atm:addLog", xPlayer.source, 0, "Retrait de cash", amount)
+        if xPlayer.getBank() >= amount then
+            -- CHANGE THIS 
+            xPlayer.addMoney(amount)
+            xPlayer.removeBank(amount)
+            TriggerClientEvent("esx:showAdvancedNotification", xPlayer.source, "Banque", "Retrait", "Vous avez retiré ~g~$"..amount, "CHAR_BANK_MAZE")
+            -- DO NOT CHANGE THIS
+            TriggerClientEvent("atm:addLog", xPlayer.source, 0, "Retrait de cash", amount)
+        end
     end
 
     if action == "deposit" then
-        -- CHANGE THIS 
-        xPlayer.removeMoney(amount)
-        xPlayer.addBank(amount)
-        TriggerClientEvent("esx:showAdvancedNotification", xPlayer.source, "Banque", "Dépot", "Vous avez déposé ~g~$"..amount, "CHAR_BANK_MAZE")
-        -- DO NOT CHANGE THIS
-        TriggerClientEvent("atm:addLog", xPlayer.source, 1, "Dépot de cash", amount)
+        if xPlayer.getMoney() >= amount then
+            -- CHANGE THIS 
+            xPlayer.removeMoney(amount)
+            xPlayer.addBank(amount)
+            TriggerClientEvent("esx:showAdvancedNotification", xPlayer.source, "Banque", "Dépot", "Vous avez déposé ~g~$"..amount, "CHAR_BANK_MAZE")
+            -- DO NOT CHANGE THIS
+            TriggerClientEvent("atm:addLog", xPlayer.source, 1, "Dépot de cash", amount)
+        end
     end
     -- CHANGE THIS 
     local playerMoney = xPlayer.getBank()
