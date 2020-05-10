@@ -12,11 +12,11 @@ Config.GetPlayerMoney = function(action)
 end
 
 Config.MoneyLevel = { ---DO NOT TOUCH TO THE KEY ENTRIES | "MAX" IS IF YOU ANT TO BE ABLE TO DEPOSIT ALL THE CASH
-    [1] = 100, 
-    [2] = 200,
-    [3] = 500,
-    [5] = 1000,
-    [6] = 2500,
+    [1] = 10, 
+    [2] = 100,
+    [3] = 1000,
+    [5] = 5000,
+    [6] = 10000,
     [7] = "max"
     
 }

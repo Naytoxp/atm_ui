@@ -31,7 +31,6 @@ function InitiateBlip()
         SetBlipColour(blip, 2)
     end
 end
-
 InitiateBlip()
 
 Citizen.CreateThread(function()
@@ -152,7 +151,7 @@ function SetDataSlot(scaleform, slotId, string, amount)
     BeginScaleformMovieMethod(scaleform, "SET_DATA_SLOT")
     ScaleformMovieMethodAddParamInt(tonumber(slotId))
     BeginTextCommandScaleformString(string)
-    AddTextComponentFormattedInteger(Amount, 1)
+    AddTextComponentFormattedInteger(amount, 1)
     EndTextCommandScaleformString()
     EndScaleformMovieMethod()
 end
@@ -239,7 +238,7 @@ function Withdraw(scaleform)
 
 	BeginScaleformMovieMethod(scaleform, "SET_DATA_SLOT")
 	ScaleformMovieMethodAddParamInt(0)
-	AddString("MPATM_WITM")
+	AddString("MPATM_WITMT")
 	EndScaleformMovieMethod()
 
 	BeginScaleformMovieMethod(scaleform, "SET_DATA_SLOT")
@@ -290,7 +289,7 @@ function Deposit(scaleform)
 
 	BeginScaleformMovieMethod(scaleform, "SET_DATA_SLOT")
 	ScaleformMovieMethodAddParamInt(0)
-	AddString("MPATM_DIDM")
+	AddString("MPATM_DITMT")
 	EndScaleformMovieMethod()
         --[[ DO NOT PUT A VALUE HERE ]]
 	BeginScaleformMovieMethod(scaleform, "SET_DATA_SLOT")
@@ -349,8 +348,6 @@ function OperationsLogs(scaleform)
     ScaleformMovieMethodAddParamInt(1)
     AddString("MPATM_BACK")
     EndScaleformMovieMethod()
-
-    local cfg = Config.Operations[1]
 
     if transactionLog[1] ~= nil and transactionLog[1] ~= {} then
         for i = 2, (#transactionLog+1), 1 do
