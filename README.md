@@ -10,6 +10,10 @@ Features:
 * Transaction Logs saved client-side
 * Transaction log easily added with an event
 
+Pictures :
+* Main Menu : [main](https://ibb.co/x6pZrPP)
+* Transaction Log Menu : [transactionLog](https://ibb.co/FBxPrrf)
+
 Notes:
 * It is compatible with ESX 1.1.0 but very easily updatable
 * All the ATM are present
@@ -17,7 +21,7 @@ Notes:
 How to install:
 1. Download the repo here [ATM:UI](https://github.com/Naytoxp/atm_ui)
 2. Place the resource in your resource folder
-3. Configure server-side the money functions/events
+3. Configure in [s_main.lua] the money functions/events
 4. Add "start atm_ui" to your server.cfg
 5. Enjoy
 
