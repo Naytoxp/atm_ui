@@ -11,8 +11,10 @@ Features:
 * Transaction log easily added with an event
 
 Pictures :
-* Main Menu : [main](pictures/mainMenu.jpg)
-* Transaction Log Menu : [transactionLog](pictures/transactionLog.jpg)
+* Main Menu : 
+[main](pictures/mainMenu.jpg)
+* Transaction Log Menu : 
+[transactionLog](pictures/transactionLog.jpg)
 
 Notes:
 * It is compatible with ESX 1.1.0 but very easily updatable
