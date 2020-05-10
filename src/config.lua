@@ -1,5 +1,12 @@
 Config = {}
 
+-------------------------------------------------------------
+------ SET TO FALSE UNLESS YOU KNOW WHAT YOU'RE DOING -------
+-------------------------------------------------------------
+
+Config.EnableDev = true
+
+-- UNLESS YOU HAVE A BETTER WAY, I ADVICE YOU TO JUST EDIT THE SERVER SIDE
 Config.GetPlayerMoney = function(action)
     TriggerServerEvent("atm:handlingMoney", action)
 end
@@ -19,12 +26,14 @@ Config.ATM = {
         action = function(amount)
             -- UNLESS YOU HAVE A BETTER WAY, I ADVICE YOU TO JUST EDIT THE SERVER SIDE
             TriggerServerEvent("atm:handlingMoney", "withdraw", amount)
-        
+
         end
     },
     [1] = { -- Deposit
         action = function(amount)
+            -- UNLESS YOU HAVE A BETTER WAY, I ADVICE YOU TO JUST EDIT THE SERVER SIDE
             TriggerServerEvent("atm:handlingMoney", "deposit", amount)
+
         end
     },
 

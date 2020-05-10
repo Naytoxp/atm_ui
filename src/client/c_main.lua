@@ -1,20 +1,19 @@
-local scaleform = nil
-local bankForm
-
-local display, curMenu = false, nil
+local scaleform, bankForm = nil
+local display, curMenu, tempAmount, tempAction = false, nil
 local transactionLog = {}
 transactionLog = json.decode(GetResourceKvpString("transactionLog"))
 local PlayerMoney, PlayerCash = 0, 0
-
-local tempAmount, tempAction
-
-withdrawAmount = {}
-depositAmount = {}
-for i = 1, 7 do if i ~= 4 then withdrawAmount[i] = 0; depositAmount[i] = 0 end end
+local withdrawAmount, depositAmount = {}, {}
+for i = 1, 7 do 
+    if i ~= 4 then 
+        withdrawAmount[i] = 0
+        depositAmount[i] = 0 
+    end 
+end
 
 Citizen.CreateThread(function()
     while true do
-        Config.GetPlayerMoney("get", "bank")
+        Config.GetPlayerMoney()
         Wait(5000)
     end
 end)
@@ -69,6 +68,11 @@ AddEventHandler("atm:sendMoney", function(money, cash)
     PlayerMoney = tonumber(money)
     PlayerCash = tonumber(cash)
 end)
+
+------------------------------------------------------------------------------------------------------
+--------------------------------- UNDER THIS, YOU SHOULD'NT EDIT -------------------------------------
+------------------- IF YOU DO, I RESERVE THE RIGHT TO NOT PROVIDE ANY SUPPORT ------------------------
+------------------------------------------------------------------------------------------------------
 
 function AddString(param) -- Function name from the
 	BeginTextCommandScaleformString(param)
@@ -379,21 +383,16 @@ function ErrorMenu(scaleform)
 
     BeginScaleformMovieMethod(scaleform, "SET_DATA_SLOT")
     ScaleformMovieMethodAddParamInt(0)
-    AddString("MPATM_ERR")
+    if curMenu == "errorMenu1" then
+        AddString("MPATM_NODO")
+    elseif curMenu == "errorMenu2" then
+        AddString("MPATM_NODO2")
+    end
     EndScaleformMovieMethod()
 
     BeginScaleformMovieMethod(scaleform, "SET_DATA_SLOT")
     ScaleformMovieMethodAddParamInt(1)
     AddString("MPATM_BACK")
-    EndScaleformMovieMethod()
-
-    BeginScaleformMovieMethod(scaleform, "SET_DATA_SLOT")
-    ScaleformMovieMethodAddParamInt(2)
-    if curMenu == "errorMenu1" then
-        AddString("MPATM_WITM")
-    elseif curMenu == "errorMenu2" then
-        AddString("MPATM_DIDM")
-    end
     EndScaleformMovieMethod()
 
     BeginScaleformMovieMethod(scaleform, "DISPLAY_BALANCE")
@@ -448,7 +447,7 @@ function OpenSubMenu(key)
                 curMenu = "subMenu"..key
             else
                 bankForm = PendingAction("ATM")
-                Wait(6000)
+                Wait(2000)
                 curMenu = "errorMenu1"
                 SetScaleformMovieAsNoLongerNeeded(bankForm)
                 bankForm = ErrorMenu("ATM")
@@ -459,6 +458,8 @@ function OpenSubMenu(key)
                 bankForm = Withdraw("ATM")
                 curMenu = "subMenu"..key
             else
+                bankForm = PendingAction("ATM")
+                Wait(2000)
                 curMenu = "errorMenu2"
                 SetScaleformMovieAsNoLongerNeeded(bankForm)
                 bankForm = ErrorMenu("ATM")
@@ -547,7 +548,15 @@ function OpenSubMenu(key)
     end
 end
 
+-------------------------------------------------------------------------------------------------------------
+----------------- THIS IS THE EVENT YOU HAVE TO PUT WHEN YOU WANT AN OPERATION TO BE LOGED ------------------
+------ EX (server-side , withdraw): TriggerClientEvent("atm:addLog", source, 1, "Cash withdraw", 2500) ------
+-------------------------------------------------------------------------------------------------------------
 
+---atm:addLog
+---@param type number
+---@param name string
+---@param amount number
 RegisterNetEvent("atm:addLog")
 AddEventHandler("atm:addLog", function(type, name, amount)
     table.insert(transactionLog, 1, {type = type, name = name, amount = amount})
@@ -557,6 +566,12 @@ AddEventHandler("atm:addLog", function(type, name, amount)
     end
 end)
 
-RegisterCommand("money", function()
-    print("Cash = " .. PlayerCash .. " | Bank = " .. PlayerMoney)
-end)
+----------------------------------------------------
+------ THIS COMMAND IS JUST FOR DEVELOPPEMENT ------
+----------------------------------------------------
+
+if Config.EnableDev then
+    RegisterCommand("money", function()
+        print("Cash = " .. PlayerCash .. " | Bank = " .. PlayerMoney)
+    end)
+end
