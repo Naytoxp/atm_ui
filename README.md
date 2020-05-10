@@ -22,4 +22,4 @@ How to install:
 5. Enjoy
 
 Credits:
-* Thanks a lot to teb - https://lsrp.cz, for helping me with the scaleform stuff
+* Thanks a lot to **teb - https://lsrp.cz**, for helping me with the scaleform stuff
