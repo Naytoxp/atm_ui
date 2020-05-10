@@ -13,11 +13,11 @@ Features:
 Pictures :
 * Main Menu : 
 
-[main](pictures/mainMenu.jpg)
+![main](pictures/mainMenu.jpg)
 
 * Transaction Log Menu : 
 
-[transactionLog](pictures/transactionLog.jpg)
+![transactionLog](pictures/transactionLog.jpg)
 
 
 Notes:
