@@ -11,7 +11,7 @@ Features:
 * Transaction log easily added with an event
 
 Notes:
-* It is compatible at **least** with ESX 1.1.0 and ESX 1.2.0, but you should update your ESX to the latest version, and if it appear that a new version of ESX is not compatible, the script will be fixed.
+* It is compatible with ESX 1.1.0 but very easily updatable
 * All the ATM are present
 
 How to install:
