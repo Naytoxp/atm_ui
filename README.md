@@ -12,11 +12,12 @@ Features:
 
 Pictures :
 * Main Menu : 
-
 ![main](pictures/mainMenu.jpg)
-
+* Deposit Menu : 
+![depositMenu](pictures/depositMenu.jpg)
+![depositMenu2](pictures/depositMenu2.jpg)
+![depositMenu3](pictures/depositMenu3.jpg)
 * Transaction Log Menu : 
-
 ![transactionLog](pictures/transactionLog.jpg)
 
 
