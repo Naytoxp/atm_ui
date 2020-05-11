@@ -1,7 +1,7 @@
 local scaleform, bankForm = nil
 local display, curMenu, tempAmount, tempAction = false, nil
 local transactionLog = {}
-transactionLog = json.decode(GetResourceKvpString("transactionLog"))
+if GetResourceKvpString("transactionLog") ~= nil then transactionLog = json.decode(GetResourceKvpString("transactionLog")) else print("No Resource KVP String found") end
 local PlayerMoney, PlayerCash = 0, 0
 local withdrawAmount, depositAmount = {}, {}
 for i = 1, 7 do 
