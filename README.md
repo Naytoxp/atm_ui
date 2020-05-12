@@ -18,7 +18,7 @@ Hello everyone, I am releasing an updated and ATM UI like GTA:O using scaleform,
 ![depositMenu2](pictures/depositMenu2.jpg)
 ![depositMenu3](pictures/depositMenu3.jpg)
 * Transaction Log Menu : 
-![transactionLog](pictures/transactionLog.jpg)
+![transactionLog](pictures/transactionLog.jpg) 
 
 
 ### Notes:
