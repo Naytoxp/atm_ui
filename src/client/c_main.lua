@@ -97,32 +97,32 @@ end)
 function IsNearATM()
 	local objects = {}
 	for _,v in pairs(Atm) do
-	  table.insert(objects, v.prop)
+		table.insert(objects, v.prop)
 	end
-  
+	
 	local ped = GetPlayerPed(-1)
 	local list = {}
-  
+	
 	for _,v in pairs(objects) do
 		local obj = GetClosestObjectOfType(GetEntityCoords(ped).x, GetEntityCoords(ped).y, GetEntityCoords(ped).z, 5.0, GetHashKey(v), false, true ,true)
 		local dist = GetDistanceBetweenCoords(GetEntityCoords(ped), GetEntityCoords(obj), true)
 		table.insert(list, {object = obj, distance = dist})
-	  end
-  
-	  local closest = list[1]
-	  for _,v in pairs(list) do
-		if v.distance < closest.distance then
-		  closest = v
 		end
-	  end
-  
-	  local distance = closest.distance
-	  local object = closest.object
-	  
+	
+		local closest = list[1]
+		for _,v in pairs(list) do
+		if v.distance < closest.distance then
+			closest = v
+		end
+		end
+	
+		local distance = closest.distance
+		local object = closest.object
+		
 
-	  if distance < 1.8 then
+		if distance < 1.8 then
 		return true
-	  end
+		end
 end
 
 RegisterCommand("openatm", function()
